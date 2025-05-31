@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résumé Naze - Devine le Film !</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: 2rem auto;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .answer {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    #revealBtn {
+      margin-top: 1rem;
+      background: #28a745;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Résumé Naze</h1>
+  <div class="card">
+    <p id="summary">Clique sur le bouton pour afficher un mauvais résumé de film. Essaie de deviner le titre !</p>
+    <button onclick="showRandomSummary()">🔁 Nouveau Résumé</button>
+    <button id="revealBtn" onclick="revealAnswer()" style="display:none;">👀 Révéler la réponse</button>
+    <p class="answer" id="answer"></p>
+  </div>
+  <footer>
+    Pour utiliser : ouvre cette page sur ton téléphone ou ordinateur, clique sur "Nouveau Résumé", devine le film, puis clique sur "Révéler la réponse".
+  </footer>
+
+  <script>
+    const summaries = [
+      { bad: "Un gars passe 3 heures à essayer de rendre un anneau à son ex.", film: "Le Seigneur des Anneaux" },
+      { bad: "Une ado dort pendant des années parce qu'un inconnu l'a embrassée.", film: "La Belle au Bois Dormant" },
+      { bad: "Des gens ouvrent une boîte et finissent tous morts ou possédés.", film: "Hellraiser" },
+      { bad: "Un iceberg ruine une love story naissante.", film: "Titanic" },
+      { bad: "Un gars découvre que sa coloc est un parasite avec des tentacules.", film: "Venom" },
+      { bad: "Un enfant refuse de rentrer chez lui, alors il appelle des flics en vélo.", film: "E.T. l'extra-terrestre" },
+      { bad: "Une famille part en vacances et oublie leur fils. Deux fois.", film: "Maman, j'ai raté l'avion" },
+      { bad: "Un vieux milliardaire paie des enfants pour les traumatiser à vie.", film: "Charlie et la Chocolaterie" },
+      { bad: "Un type se réveille et tout le monde est mort ou zombifié.", film: "28 jours plus tard" },
+      { bad: "Un gars met une cape, bat des clowns, refuse de consulter un psy.", film: "The Dark Knight" }
+    ];
+
+    let current = null;
+
+    function showRandomSummary() {
+      const random = summaries[Math.floor(Math.random() * summaries.length)];
+      current = random;
+      document.getElementById("summary").textContent = random.bad;
+      document.getElementById("answer").textContent = "";
+      document.getElementById("revealBtn").style.display = "inline-block";
+    }
+
+    function revealAnswer() {
+      if (current) {
+        document.getElementById("answer").textContent = current.film;
+        document.getElementById("revealBtn").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
